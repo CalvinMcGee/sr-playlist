@@ -10,12 +10,13 @@ const api = new Api();
 
 const generatedM3U = (
   template: {id: number, url: string},
+  quality: 'lo'|'normal'|'hi',
   channels: Array<{id: number, name: string, channeltype: string}>
 ): string => {
   return generateM3U(channels.map((channel) => {
     return {
       name: channel.name,
-      url: formatUrl(template.url, channel.id.toFixed(), 'lo'),
+      url: formatUrl(template.url, channel.id.toFixed(), quality),
     };
   }));
 }
@@ -23,6 +24,7 @@ const generatedM3U = (
 // Example
 console.log(generatedM3U(
   {id: 2, url: "https://sverigesradio.se/topsy/direkt/srapi/[channelid]-[quality].mp3"},
+  'normal',
   [
     {id: 132 ,name: 'P1', channeltype: 'Riks',},
     {id: 163 ,name: 'P2', channeltype: 'Riks',},
