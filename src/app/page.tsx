@@ -66,6 +66,22 @@ export default async function Home() {
             )}
           </NativeSelect>
         </FormControl>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            Välj ljudkvalitet
+          </InputLabel>
+          <NativeSelect
+            defaultValue='normal'
+            inputProps={{
+              name: 'quality',
+              id: 'uncontrolled-native',
+            }}
+          >
+            <option value="lo">Låg kvalitet</option>
+            <option value="normal">Normal kvalitet</option>
+            <option value="hi">Hög kvalitet</option>
+          </NativeSelect>
+        </FormControl>
         {Object.keys(channels).map((type) =>
           <div>
             <Typography variant="h3" component="h2">{type}</Typography>
