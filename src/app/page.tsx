@@ -55,14 +55,14 @@ export default async function Home() {
             Välj ljudformat
           </InputLabel>
           <NativeSelect
-            defaultValue={templates?.urltemplates?.[0]}
+            defaultValue={templates[0]}
             inputProps={{
               name: 'template',
               id: 'uncontrolled-native',
             }}
           >
-            {templates?.urltemplates?.map((template) =>
-              <option key={template.id} value={template.id}>{template.url}</option>
+            {templates?.map((template) =>
+              <option key={template.id} value={template.id}>{template.name}</option>
             )}
           </NativeSelect>
         </FormControl>

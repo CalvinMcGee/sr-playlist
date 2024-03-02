@@ -1,19 +1,20 @@
 export default class Api {
-  templateNames() {
-    return {
-      2: 'MP3' ,
-      3: 'AAC PLS' ,
-      4: 'AAC M3U' ,
-      5: 'AAC' ,
-      10: 'HLS' ,
-      11: 'DASH' ,
-      12: 'DASH (again)' ,
-    };
-  }
+  template = {
+    2: 'MP3' ,
+    3: 'AAC PLS' ,
+    4: 'AAC M3U' ,
+    5: 'AAC' ,
+    10: 'HLS' ,
+    11: 'DASH' ,
+    12: 'DASH (again)' ,
+  };
 
   async templates()
-    :Promise<{urltemplates: Array<{id: number, url: string}>}> {
-    return this.fetch<{urltemplates: Array<{id: number, url: string}>}>('https://api.sr.se/api/v2/audiourltemplates/liveaudiotypes?format=json');
+    :Promise<Array<{id: number, name: string, url: string}>> {
+    return this.fetch<{urltemplates: Array<{id: number, url: string}>}>('https://api.sr.se/api/v2/audiourltemplates/liveaudiotypes?format=json')
+      .then((data) => {
+        return data.urltemplates.map((template) => ({...template, name: this.template[template.id]}));
+      });
   }
 
   async channels(
